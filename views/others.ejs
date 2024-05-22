@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body {
+        padding:0;
+        margin:0;
+    }
+    nav  {
+        display: flex;
+    }
+    nav ul {
+        display: flex;
+        list-style: none;
+    }
+    nav ul li{
+        padding-left:20px;
+    }
+    header {
+        background-color: aliceblue;
+        border-bottom:5px outset #ffdd;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+    .links{
+        margin-right: 20px;
+    }
+    header nav ul li {
+        position:relative;
+        text-align: center;
+    }
+    main {
+        padding-left: auto;
+        padding-right: auto;
+    }
+    .main h1 {
+        text-align: center;
+    }
+    footer {
+        position:absolute;
+        bottom:0;
+        width: 810px;
+        height: 55px;
+        margin: 0 auto 0 auto;
+    }
+    footer p {
+        display:flex;
+        justify-content: center;
+    }
+    /*共通--ここから↓*/
+    .fixed_button {
+        position:fixed;
+        bottom:30px;
+        right: 30px;
+    }
+
+    .container {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+    .main {
+        width: 70%;
+        padding: 10px;
+        border: 1px solid black;
+    }
+    
+    .side {
+        width: 20%;
+        padding: 10px;
+        border: 1px solid black;
+        list-style:none;
+    }
+
+    .side details[open] .open {
+        display:none;
+    }
+    .side details:not([open]) .close {
+        display:none;
+    }
+    /*共通--ここまで↑*/
+
+    /*ログイン--ここから↓*/
+    .loginform {
+        position: relative;
+        width: auto;
+        padding:1px, 1px, 1px, 1px;
+        border: 2px solid rgb(0,255,0);
+        text-align: center;
+    }
+    #id {
+        width:300px;
+        margin: 30px 0 30px 0;
+    }
+    #pass {
+        width: 300px;
+        margin: 30px 0 30px 0;
+    }
+    #send {
+        width: 100px;
+        height: 30px;
+        margin: 30px 0 30px 0;
+    }
+    .history {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    }
+    .history .row {
+    display: flex;
+    flex-direction: row;
+    flex-basis: max-content;
+    width: 100%;
+    }
+    .history .col {
+    border: 1px solid #555;
+    flex-basis: 100%;
+    padding: 15px;
+    }
+    .center-text {
+    text-align: center;
+    }
+    a :hover{
+        color:aqua;
+        background-color: grey;
+    }
+    /*ログイン--ここまで↑*/
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1><a href="/home">タイトル</a></h1>
+            <ul>
+                <li><a href="localhost:80">シフト管理者用</a></li>
+                <li><a href="localhost:5500/なら/19360257402/71846378589/1746780/Main.html">ゲーム</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <button class="fixed_button"><a href="/makedr">日報作成</a></button>
+            <div class="side">
+                <h1>日報閲覧</h1>
+                <details>
+                    <summary>
+                        <span class="open">日報</span>
+                        <span class="close">日報</span>
+                    </summary>
+                    <% for(let i=0; i<namesAtOther.length; i++) { %>
+                        <li><a href="/report/name/<%= namesAtOther[i].l_name %>"><%- namesAtOther[i].l_name %>さん</a></li>
+                    <% } %>
+                </details>
+                <h2>ニュース</h2>
+                <details>
+                    <summary>
+                        <span class="open">ニュース</span>
+                        <span class="close">ニュース</span>
+                    </summary>
+                    <li>最近導入した機器</li>
+                    <li>新メニュー表</li>
+                </details>
+            </div>
+            <div class="main">
+                <% if(otherName.name) { %>
+                    <h4><%- otherName.name %>さんの日報記録です</h4>
+                <% } %>
+                <h1>日報記録</h1>
+                <div class="reportRecord">
+                    <div class="row">
+                        <div class="col center-text">
+                            日付順
+                        </div>
+                    </div>
+                    <% for(let i=0; i<otherdays.length; i++) { %>
+                        <div class="row">
+                            <% hdate = otherdays[i].m_date %>
+                            <div class="col center-text">
+                                <a href="/report/date/<%= hdate %>/Name/<%= otherName.name %>"><%= otherdays[i].m_date %></a>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p><small>&copyhoge株式会社</small></p>
+    </footer>
+</body>
+</html>
